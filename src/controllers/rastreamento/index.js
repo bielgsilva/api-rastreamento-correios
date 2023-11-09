@@ -1,6 +1,7 @@
 const accountSid = 'AC3a186cc082bb550c698ecb20c4eb4d36';
-const authToken = '9d5c0f080c46abd61a1a9c7e757699f8';
+const authToken = '2eeccfb14787d5872273a7fc2cf14029';
 const client = require('twilio')(accountSid, authToken);
+
 
 const correios = require('correios-rastreamento');
 
@@ -19,9 +20,13 @@ const rastrearEncomenda = async (request, response) => {
 
 const receberAtualizações = async (request, response) => {
     try {
-        const { data } = request.query;
+        const { data, phoneNumber } = request.query;
 
         const formattedResult = formatResult(JSON.parse(data));
+
+        const formattedNumber = phoneNumber.replace(/\D/g, '')
+
+        console.log(formattedNumber);
 
         function formatResult(data) {
             const statusList = data.map(item => {
@@ -44,7 +49,7 @@ const receberAtualizações = async (request, response) => {
             .create({
                 body: formattedResult,
                 from: 'whatsapp:+14155238886',
-                to: 'whatsapp:+557192756652'
+                to: `whatsapp:+55${formattedNumber}`
             })
             .then(message => console.log(message.sid))
 

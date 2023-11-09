@@ -1,8 +1,4 @@
-const accountSid = 'AC3a186cc082bb550c698ecb20c4eb4d36';
-const authToken = '2eeccfb14787d5872273a7fc2cf14029';
-const client = require('twilio')(accountSid, authToken);
-
-
+const client = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
 const correios = require('correios-rastreamento');
 
 

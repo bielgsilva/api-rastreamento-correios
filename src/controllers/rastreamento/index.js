@@ -48,7 +48,6 @@ const receberAtualizações = async (request, response) => {
                 to: 'whatsapp:+557192756652'
             })
             .then(message => console.log(message.sid))
-            .done();
 
         return response
             .status(200)

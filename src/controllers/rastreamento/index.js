@@ -18,28 +18,32 @@ const receberAtualizações = async (request, response) => {
     try {
         const { data, phoneNumber } = request.query;
 
-        const formattedResult = formatResult(JSON.parse(data));
-
+        
         const formattedNumber = phoneNumber.replace(/\D/g, '')
-
+        
         console.log(formattedNumber);
-
+        
         function formatResult(data) {
             const statusList = data.map(item => {
                 const { status, data, local, origem, destino } = item;
-
+                
                 let formattedData = `📅 Data: ${new Date(data).toLocaleDateString()}`;
                 let formattedStatus = `✉️ Status: ${status}`;
                 let formattedLocal = `🏢 Local: ${local || 'N/A'}`;
                 let formattedOrigem = origem ? `🛫 Origem: ${origem}` : '';
                 let formattedDestino = destino ? `🛬 Destino: ${destino}` : '';
-
+                
                 return `${formattedData}\n${formattedStatus}\n${formattedLocal}\n${formattedOrigem}\n${formattedDestino}\n`;
             });
-
+            
 
             return `ℹ️ Atualização de Status da Encomenda: \n\n\n${statusList.join('\n\n')}`;
         }
+        
+        const formattedResult = formatResult(JSON.parse(data));
+        
+        console.log(formattedResult);
+
 
         client.messages
             .create({

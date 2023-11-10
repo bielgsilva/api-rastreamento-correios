@@ -45,9 +45,10 @@ const receberAtualizações = async (request, response) => {
             .create({
                 body: formattedResult,
                 from: 'whatsapp:+14155238886',
-                to: `whatsapp:+55${formattedNumber}`
+                to: 'whatsapp:+557192756652'
             })
             .then(message => console.log(message.sid))
+            .done();
 
         return response
             .status(200)
